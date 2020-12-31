@@ -37,7 +37,6 @@ export async function getStaticProps({ params }) {
     let tagName = "";
     for (let i = 0; i < tags.length; i++) {
         if (tags[i].id === tagId) {
-            console.log(tags[i]);
             tagName = tags[i].name_jp;
         }
     }
