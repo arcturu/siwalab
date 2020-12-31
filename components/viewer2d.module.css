@@ -1,0 +1,84 @@
+.container {
+  position: relative;
+  margin: 0 auto;
+}
+
+.arrow {
+  position: relative;
+  display: inline-block;
+  padding-left: 20px;
+}
+
+.arrow.right::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border: 0px;
+  border-top: solid 2px gray;
+  border-right: solid 2px gray;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: -10px;
+  left: 0;
+  margin-top: -4px;
+}
+
+.arrow.up::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border: 0px;
+  border-top: solid 2px gray;
+  border-right: solid 2px gray;
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -4px;
+}
+
+.arrow.down::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border: 0px;
+  border-top: solid 2px gray;
+  border-right: solid 2px gray;
+  -ms-transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -4px;
+}
+
+.arrow.left::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border: 0px;
+  border-top: solid 2px gray;
+  border-right: solid 2px gray;
+  -ms-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+  position: absolute;
+  top: -10px;
+  left: 4px;
+  margin-top: -4px;
+}
+
+.rotate {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 10px;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
