@@ -16,18 +16,21 @@ export default function Viewer2d(props) {
 
     return (
         <div className={styles.container}
-            onMouseDown={(e) => {
+            onPointerDown={(e) => {
                 setMouseDownPos([e.clientX, e.clientY]);
                 setIsDragging(true);
                 setMouseDownAzimuthId(azimuthId);
             }}
-            onMouseUp={(e) => {
+            onPointerUp={(e) => {
                 setIsDragging(false);
             }}
-            onMouseLeave={(e) => {
+            onTouchMove={(e) => {
+                e.stopPropagation();
+            }}
+            onPointerLeave={(e) => {
                 setIsDragging(false);
             }}
-            onMouseMove={(e) => {
+            onPointerMove={(e) => {
                 if (!isDragging) {
                     return;
                 }

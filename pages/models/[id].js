@@ -84,7 +84,8 @@ export default function Model({ modelId, modelName, modelTags }) {
                 <title>{modelName} | しわラボ</title>
             </Head>
             <Viewer2d modelId={modelId} size={viewerSize} />
-            <div style={{ width: `${viewerSize}px`, margin: `0 auto` }}>
+            <div style={{ width: `${viewerSize}px`, margin: `0 auto 16px` }}>
+                <h1 style={{ marginLeft: '4px' }}>{modelName}</h1>
                 <ul className={styles.tagList}>
                     {tagList}
                 </ul>
