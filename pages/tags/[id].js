@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Paper from '@material-ui/core/Paper';
 import styles from './[id].module.css';
 import Head from 'next/head'
+import getConfig from 'next/config';
 
 export async function getStaticPaths() {
     const tags = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'meta/tags.json')));
@@ -40,16 +41,18 @@ export async function getStaticProps({ params }) {
             tagName = tags[i].name_jp;
         }
     }
+    const basePath = getConfig().publicRuntimeConfig.basePath;
     return {
         props: {
             tagId: tagId,
             tagName: tagName,
-            modelIds: modelIds
+            modelIds: modelIds,
+            basePath: basePath
         }
     }
 }
 
-export default function Tag({ tagId, tagName, modelIds }) {
+export default function Tag({ tagId, tagName, modelIds, basePath }) {
     let modelList = [];
     for (let i = 0; i < modelIds.length; i++) {
         let modelId = modelIds[i];
@@ -59,7 +62,7 @@ export default function Tag({ tagId, tagName, modelIds }) {
                     <a>
                         <Paper elevation={3} className={styles.thumbWrapper}>
                             <div className={styles.thumbContent} style={{
-                                backgroundImage: `url(/model-thumbs/${modelId}.png)`,
+                                backgroundImage: `url(${basePath}/model-thumbs/${modelId}.png)`,
                                 backgroundSize: `100%`
                             }} />
                         </Paper>

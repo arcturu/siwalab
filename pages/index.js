@@ -4,11 +4,12 @@ import fs from 'fs'
 import path from 'path'
 import styles from './index.module.css'
 import Paper from '@material-ui/core/Paper';
+import getConfig from 'next/config';
 
 export async function getStaticProps({ params }) {
   const models = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'meta/models.json')));
   const tags = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'meta/tags.json')));
-
+  const basePath = getConfig().publicRuntimeConfig.basePath;
   let modelIds = [];
   let N = 10;
   for (let i = models.length - 1; i >= Math.max(0, models.length - N); i--) {
@@ -16,12 +17,13 @@ export async function getStaticProps({ params }) {
   }
   return {
     props: {
-      modelIds: modelIds
+      modelIds: modelIds,
+      basePath: basePath
     }
   }
 }
 
-export default function Home({ modelIds }) {
+export default function Home({ modelIds, basePath }) {
   let modelList = [];
   for (const modelId in modelIds) {
     modelList.push(
@@ -30,7 +32,7 @@ export default function Home({ modelIds }) {
           <a>
             <Paper elevation={3} className={styles.thumbWrapper}>
               <div className={styles.thumbContent} style={{
-                backgroundImage: `url(/model-thumbs/${modelId}.png)`,
+                backgroundImage: `url(${basePath}/model-thumbs/${modelId}.png)`,
                 backgroundSize: `100%`
               }} />
             </Paper>
