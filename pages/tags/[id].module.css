@@ -1,0 +1,40 @@
+.tagHeader {
+  margin-left: 16px;
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.flexItem {
+  flex-basis: content;
+  margin: 16px;
+}
+
+.thumbWrapper {
+  padding: 16px;
+}
+
+.thumbContent {
+  padding: 88px;
+}
+
+@media only screen and (max-width: 600px) {
+  .flexItem {
+    flex-basis: content;
+    margin: 4px;
+  }
+
+  .thumbWrapper {
+    padding: 16px;
+  }
+
+  .thumbContent {
+    padding: 60px;
+  }
+}
