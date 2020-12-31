@@ -9,7 +9,9 @@ import InfoIcon from '@material-ui/icons/Info';
 import { Button } from '@material-ui/core';
 import Link from 'next/link'
 import Head from 'next/head'
-
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import * as gtag from '../lib/gtag'
 
 const theme = createMuiTheme({
     palette: {
@@ -30,6 +32,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function App({ Component, pageProps }) {
+    const router = useRouter()
+    useEffect(() => {
+        const handleRouteChange = (url) => {
+            gtag.pageview(url)
+        }
+        router.events.on('routeChangeComplete', handleRouteChange)
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange)
+        }
+    }, [router.events])
+
     const classes = useStyles();
     return (
         <ThemeProvider theme={theme}>
