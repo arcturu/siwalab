@@ -11,6 +11,7 @@ export default function Viewer2d(props) {
 
     const size = props.size;
     const modelId = props.modelId;
+    const basePath = props.basePath;
 
     const roundAzimuthId = (x) => (x + (x < 0 ? Math.ceil(-x / 24) * 24 : 0)) % 24;
 
@@ -23,9 +24,6 @@ export default function Viewer2d(props) {
             }}
             onPointerUp={(e) => {
                 setIsDragging(false);
-            }}
-            onTouchMove={(e) => {
-                e.stopPropagation();
             }}
             onPointerLeave={(e) => {
                 setIsDragging(false);
@@ -42,7 +40,7 @@ export default function Viewer2d(props) {
             style={{
                 width: `${size}px`,
                 height: `${size}px`,
-                backgroundImage: `url(../model-images/${modelId}.png)`,
+                backgroundImage: `url(${basePath}/model-images/${modelId}.png)`,
                 backgroundSize: `${100 * 24}%`,
                 backgroundRepeat: "no-repeat",
                 backgroundPositionX: `${-size * (azimuthId)}px`
