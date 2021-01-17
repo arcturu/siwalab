@@ -5,6 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import Link from 'next/link'
 import Head from 'next/head'
+import getConfig from 'next/config';
 import { useState, useEffect } from 'react'
 
 export async function getStaticPaths() {
@@ -44,16 +45,18 @@ export async function getStaticProps({ params }) {
             break;
         }
     }
+    const basePath = getConfig().publicRuntimeConfig.basePath;
     return {
         props: {
             modelId: params.id,
             modelName: modelName,
-            modelTags: modelTags
+            modelTags: modelTags,
+            basePath: basePath
         }
     }
 }
 
-export default function Model({ modelId, modelName, modelTags }) {
+export default function Model({ modelId, modelName, modelTags, basePath }) {
     const [viewerSize, setViewerSize] = useState(800);
     useEffect(() => {
         let handleResize = () => {
@@ -83,7 +86,7 @@ export default function Model({ modelId, modelName, modelTags }) {
             <Head>
                 <title>{modelName} | しわラボ</title>
             </Head>
-            <Viewer2d modelId={modelId} size={viewerSize} />
+            <Viewer2d modelId={modelId} size={viewerSize} basePath={basePath} />
             <div style={{ width: `${viewerSize}px`, margin: `0 auto 16px` }}>
                 <h1 style={{ marginLeft: '4px' }}>{modelName}</h1>
                 <ul className={styles.tagList}>
